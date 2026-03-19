@@ -2,8 +2,7 @@ import numpy as np
 
 # --- building the grip map env ---
 rows = 6
-col = 6
-
+cols = 6
 walls = {(1,1),(1,5),(2,1),(3,1),(4,4)}
 green_states = {(0,5), (2,5), (3,4), (4,3), (2,2)}
 brown_states = {(1,4), (2,3), (3,2), (4,1), (5,4)}
@@ -11,29 +10,35 @@ brown_states = {(1,4), (2,3), (3,2), (4,1), (5,4)}
 # --- actions available to move around the map ---
 actions = ['Up', 'Down', 'Left', 'Right']
 
+# --- reward given for states ---
 reward_map = {
     'white' : -0.05,
     'green' : 1.0,
     'brown' : -1.0
 }
 
+# --- building the 6x6 grid map ---
 states = []
 for r in range(rows):
-    for c in range(col):
+    for c in range(cols):
         if (r,c) not in walls:
             states.append((r,c))
 
+# --- reward function for robot landing on different states ---
 def get_reward(state):
     if state in green_states:
-        return 1.0
+        return reward_map["green"]
     elif state in brown_states:
-        return -1.0
+        return reward_map["brown"]
     else:
-        return -0.05
-    
-def move(state, action):
-    r, c = state
+        return reward_map["white"]
 
+# --- function to change coordinates according to actions Up, Down, Left, Right ---
+def move(state, action):
+    # take in current coordinates of the robot
+    r, c = state 
+
+    # change coordinates accordingly - Row changes for Up/Down, Column changes for Left/Right
     if action == 'Up':
         nr, nc = r - 1, c
     elif action == "Down":
@@ -42,8 +47,11 @@ def move(state, action):
         nr, nc = r, c - 1
     elif action == "Right":
         nr, nc = r,  c + 1
+    else:
+        # default safety check for invalid actions
+        raise ValueError(f"Invalid Action: {action}")
     
-    if nr < 0 or nr >= rows or nc < 0 or nc >= col or (nr, nc) in walls:
+    if nr < 0 or nr >= rows or nc < 0 or nc >= cols or (nr, nc) in walls:
         return state
     
     return (nr, nc)
@@ -57,6 +65,8 @@ def get_transitions(state, action):
         candidates = [("Left", 0.8), ("Up", 0.1), ("Down", 0.1)]
     elif action == "Right":
         candidates = [("Right", 0.8), ("Up", 0.1), ("Down", 0.1)]
+    else:
+        raise ValueError(f"Invalid Action: {action}")
 
     transitions = []
     for a, prob in candidates:
@@ -64,4 +74,3 @@ def get_transitions(state, action):
         transitions.append((prob, next_state))
 
     return transitions
-
