@@ -22,5 +22,12 @@ print_utilities(U_vi)
 print("\nVALUE ITERATION POLICY")
 print_utilities(policy_vi)
 
+policy_pi, U_pi, pi_history = policy_iteration()
+
+print("\nPOLICY ITERATION UTILITIES")
+print_utilities(U_pi)
+print("\nPOLICY ITERATION POLICY")
+print_utilities(policy_pi)
+
 plot_history(vi_history, [(0,0), (0,1), (1,2)], "VI Utility Estimates")
 plot_history(pi_history, [(0,0), (0,1), (1,2)], "PI Utility Estimates")
