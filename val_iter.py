@@ -1,5 +1,7 @@
-from env import *
-
+try:
+    from env_part2 import *
+except ImportError:
+    from env import *
 #gamma = 0.99
 #epsilon = 1e-6
 

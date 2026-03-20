@@ -1,4 +1,7 @@
-from env import *
+try:
+    from env_part2 import *
+except ImportError:
+    from env import *
 
 def init_policy():
     return {s: 'Up' for s in states}

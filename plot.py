@@ -2,7 +2,10 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.colors import ListedColormap
 import numpy as np
-from env import *
+try:
+    from env_part2 import *
+except ImportError:
+    from env import *
 
 arrow_map = {
     'Up' : '↑',
