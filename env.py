@@ -3,9 +3,10 @@ import numpy as np
 # --- building the grip map env ---
 rows = 6
 cols = 6
-walls = {(1,1),(1,5),(2,1),(3,1),(4,4)}
-green_states = {(0,5), (2,5), (3,4), (4,3), (2,2)}
-brown_states = {(1,4), (2,3), (3,2), (4,1), (5,4)}
+walls = {(0, 1),(1, 4),(4, 1),(4, 2),(4, 3)}
+green_states = {(0, 0), (0, 2), (0, 5), (1, 3), (2, 4), (3, 5)}
+brown_states = {(1, 1), (1, 5), (2, 2), (3, 3), (4, 4)}
+start_state = (3, 2)
 
 # --- actions available to move around the map ---
 actions = ['Up', 'Down', 'Left', 'Right']
@@ -21,7 +22,7 @@ reward_map = {
 states = []
 for r in range(rows):
     for c in range(cols):
-        if (r,c) not in walls:
+        if (r, c) not in walls:
             states.append((r,c))
 
 # --- reward function for robot landing on different states ---

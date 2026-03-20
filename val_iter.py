@@ -1,17 +1,18 @@
 from env import *
 
-gamma = 0.99
-epsilon = 1e-6
+#gamma = 0.99
+#epsilon = 1e-6
 
 def value_iteration(states, gamma = 0.99, epsilon = 1e-6):
     U = {s:0.0 for s in states}
-    history = [ ]
+    history = [U.copy()]
     iteration = 0
 
     while True:
         iteration += 1
         new_U = {}
         delta = 0
+
 
         for s in states:
             action_values = []
@@ -55,4 +56,3 @@ def extract_policy(U):
         policy[s] = best_action
 
     return policy
-

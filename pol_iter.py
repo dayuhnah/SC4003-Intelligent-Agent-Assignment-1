@@ -28,14 +28,13 @@ def policy_evaluation(policy, gamma = 0.99, epsilon = 1e-6):
 
 def policy_iteration(gamma = 0.99, epsilon = 1e-6):
     policy = init_policy()
-    history = []
+    U = policy_evaluation(policy, gamma, epsilon)
+    history = [U.copy()]
+
     iteration = 0
 
     while True:
         iteration += 1
-        U = policy_evaluation(policy, gamma, epsilon)
-        history.append(U.copy())
-
         stable = True
 
         for s in states:
@@ -61,4 +60,6 @@ def policy_iteration(gamma = 0.99, epsilon = 1e-6):
         if stable:
             print(f"Policy Iteration converged in {iteration} improvement rounds.")
             return policy, U, history
-    
+        
+        U = policy_evaluation(policy, gamma, epsilon)
+        history.append(U.copy())
