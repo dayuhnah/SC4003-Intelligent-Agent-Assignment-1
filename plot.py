@@ -1,12 +1,16 @@
+#=========================================================
+# This file provides visualization utilities for the MDP results
+#=========================================================
+
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-from matplotlib.colors import ListedColormap
-import numpy as np
+
 try:
     from env_part2 import *
 except ImportError:
     from env import *
 
+# maps action strings to unicode arrow characters for display
 arrow_map = {
     'Up' : '↑',
     'Down' : '↓',
@@ -14,6 +18,7 @@ arrow_map = {
     'Right' : '→'
 }
 
+# function prints the policy to the console as a grid of arrow
 def print_policy(policy):
     # reverse rows only so top of printed output matches top of maze figure
     for r in range(rows):
@@ -25,6 +30,7 @@ def print_policy(policy):
                 row_vals.append(arrow_map[policy[(r, c)]])
         print(" ".join(row_vals))
 
+# function prints the utility values to the console as a grid
 def print_utilities(U):
     for r in range(rows):
         row_vals = []
@@ -35,6 +41,7 @@ def print_utilities(U):
                 row_vals.append(f"{U[(r, c)]:6.2f}")
         print(" ".join(row_vals))
 
+#function renders the maze with colour as shown in the assignment document
 def plot_grid(U, policy, title):
     fig, ax = plt.subplots(figsize=(8, 8))
     ax.set_title(title, fontsize=14, fontweight='bold')
@@ -97,15 +104,18 @@ def plot_grid(U, policy, title):
                 if(r, c) == start_state:
                     ax.text(x+0.5, y+0.15, '* start',
                             ha='center', va='center', fontsize=7, color='#555555')
-                    
+
+    # column index labelling        
     for c in range(cols):
         ax.text(c + 0.5, -0.3, str(c),
                 ha='center', va='center', fontsize = 9, color='#555555')
+    # row index labelling
     for r in range(rows):
         display_r = rows - 1 - r
         ax.text(-0.15, display_r + 0.5, str(r),
                 ha='center', va='center', fontsize=9, color='#555555')
-        
+    
+    #legend making
     legend_elements = [
         mpatches.Patch(color='#7ec87e', label='Green (+1)'),
         mpatches.Patch(color='#c97c5d', label='Brown (-1)'),
@@ -119,7 +129,7 @@ def plot_grid(U, policy, title):
     plt.tight_layout()
     plt.show()
 
-
+# function that plots utility estimates as a function of iteration number
 def plot_history(history, tracked_states, title):
     plt.figure(figsize=(9, 5))
     for s in tracked_states:
@@ -127,7 +137,10 @@ def plot_history(history, tracked_states, title):
             print(f"Skipping invalid tracked state: {s}")
             continue
 
+        # collects this state's utility value at every iteration
         values = [U[s] for U in history]
+
+        # label each line with state type
         label = f'{s}'
         if s in green_states:
             label += " (green)"

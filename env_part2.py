@@ -1,4 +1,6 @@
-import numpy as np
+#=========================================================
+# This file is for part 2 - custom map of 12x12 with more challenges 
+#=========================================================
 
 rows = 12
 cols = 12
@@ -25,10 +27,6 @@ brown_states = {
     (5, 6), (5, 9),(7, 4), (7, 9),
     (9, 4), (9, 9), (11, 7), (11, 10)
 }
-
-assert not (green_states & brown_states), "Overlap green brown"
-assert not (green_states & walls), "Overlap green wall"
-assert not (brown_states & walls), "Overlap brown wall"
 
 start_state = (5, 5)
 
