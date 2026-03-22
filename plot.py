@@ -8,11 +8,6 @@ import matplotlib.patches as mpatches
 from env import *
 
 
-# try:
-#     from env_part2 import *
-# except ImportError:
-#     from env import *
-
 # maps action strings to unicode arrow characters for display
 arrow_map = {
     'Up' : '↑',

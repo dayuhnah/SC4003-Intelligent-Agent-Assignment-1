@@ -4,7 +4,10 @@
 
 
 # --- Importing files ---
-from env_part2 import *
+import sys
+import env_part2 as env
+sys.modules['env'] = env
+
 from val_iter import *
 from pol_iter import *
 from plot import *

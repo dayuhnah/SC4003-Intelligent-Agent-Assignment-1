@@ -5,11 +5,7 @@
 # 2. Policy Improvement - update each state's action to the greedy best
 #=========================================================
 from env import *
-# try:
-#     from env_part2 import *
-# except ImportError:
-#     from env import *
-    
+
 # function that initialises a default policy action for every state
 def init_policy():
     return {s: 'Up' for s in states}

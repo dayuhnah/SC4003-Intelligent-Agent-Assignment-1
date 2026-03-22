@@ -3,10 +3,6 @@
 # and computes the optimal utility for each state and extracts the greedy policy
 #=========================================================
 from env import *
-# try:
-#     from env_part2 import *
-# except ImportError:
-#     from env import *
 
 def value_iteration(states, gamma = 0.99, epsilon = 1e-6):
     # This function runs VI until utilities converge 
