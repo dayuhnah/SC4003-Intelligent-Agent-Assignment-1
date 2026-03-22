@@ -5,10 +5,13 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
-try:
-    from env_part2 import *
-except ImportError:
-    from env import *
+from env import *
+
+
+# try:
+#     from env_part2 import *
+# except ImportError:
+#     from env import *
 
 # maps action strings to unicode arrow characters for display
 arrow_map = {

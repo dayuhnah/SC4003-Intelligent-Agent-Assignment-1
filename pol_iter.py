@@ -4,11 +4,11 @@
 # 1. Policy Evaluation - compute utilities for the current policy
 # 2. Policy Improvement - update each state's action to the greedy best
 #=========================================================
-
-try:
-    from env_part2 import *
-except ImportError:
-    from env import *
+from env import *
+# try:
+#     from env_part2 import *
+# except ImportError:
+#     from env import *
     
 # function that initialises a default policy action for every state
 def init_policy():

@@ -2,11 +2,11 @@
 # This file implements the Value Iteration (VI) algortihm for solving MDP
 # and computes the optimal utility for each state and extracts the greedy policy
 #=========================================================
-
-try:
-    from env_part2 import *
-except ImportError:
-    from env import *
+from env import *
+# try:
+#     from env_part2 import *
+# except ImportError:
+#     from env import *
 
 def value_iteration(states, gamma = 0.99, epsilon = 1e-6):
     # This function runs VI until utilities converge 
